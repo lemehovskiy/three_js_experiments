@@ -1,0 +1,68 @@
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+<body>
+<script src="../lib/three.js"></script>
+<script>
+
+    // Setup a new scene
+    var scene = new THREE.Scene();
+
+
+    // Setup the camera
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 4;
+    camera.position.y = 1;
+    camera.position.x = 0;
+
+    // Setup the renderer
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+
+    //  Add the lights
+    // var ambientLight = new THREE.AmbientLight(0xFFFFFF, 6.0);
+    // scene.add(ambientLight);
+
+
+    var light = new THREE.DirectionalLight(0xffffff, 2);
+
+    // light.position.set( 20, 10, 5 );
+    scene.add(light);
+
+
+    // Models
+    var model;
+    var sphereModel;
+
+    // Load the JSON files and provide callback functions (modelToScene
+    var loader = new THREE.ObjectLoader();
+    loader.load("models/orange.json", function (obj) {
+
+        model = obj;
+        scene.add(obj);
+    });
+
+    // Render loop to rotate our sphere by a little bit each frame
+    var render = function () {
+        requestAnimationFrame(render);
+        renderer.render(scene, camera);
+    };
+
+    render();
+    // ElectronicArmory.com
+</script>
+</body>
+<!-- ElectronicArmory.com -->
+</html>
